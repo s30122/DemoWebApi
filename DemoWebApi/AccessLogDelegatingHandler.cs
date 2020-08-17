@@ -11,13 +11,13 @@ namespace DemoWebApi
 {
     public class AccessLogDelegatingHandler : DelegatingHandler
     {
-        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected async override  Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            var requestContent = await request.Content.ReadAsStringAsync();
+            var requestContent = await request.Content?.ReadAsStringAsync();
             //logger.Info($"[Request Body] : {requestContent}");
-            var response = await SendAsync(request, cancellationToken);
+            var response = await base.SendAsync(request, cancellationToken);
 
-            var responseContent = await response.Content.ReadAsStringAsync();
+            var responseContent = await response.Content?.ReadAsStringAsync();
             //logger.Info($"[Response Body] : {responseContent}");
             return response;
         }

@@ -13,7 +13,7 @@ using System.Web.Http;
 
 namespace DemoWebApi.Controllers
 {
-    [RoutePrefix("product")]
+    [RoutePrefix("api/product")]
     public class ProductController : ApiController
     {
         private readonly ProductService _service;
@@ -25,7 +25,7 @@ namespace DemoWebApi.Controllers
         }
         [HttpGet]
         [Route("")]
-        public async  Task<IHttpActionResult> Query(ProductQueryRequest request)
+        public async  Task<IHttpActionResult> Query([FromUri]ProductQueryRequest request)
         {
             var result = await _service.QueryAsync(request.CategoryId, request.PageNumber, request.PageSize);
             return Ok(new SuccessResponseModel<List<Products>>(result));

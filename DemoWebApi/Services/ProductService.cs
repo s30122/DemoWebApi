@@ -22,6 +22,7 @@ namespace DemoWebApi.Services
         {
             // todo : call sp
             var products = await _db.Products.Where(x => !categoryId.HasValue || x.CategoryID == categoryId.Value)
+                                       .OrderBy(x=>x.ProductID)
                                        .Skip((pageNumber - 1) * pageSize)
                                        .Take(pageSize)
                                        .ToListAsync();

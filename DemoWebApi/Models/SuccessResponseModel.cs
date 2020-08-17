@@ -25,6 +25,7 @@ namespace DemoWebApi.Models
         
         public SuccessResponseModel(T data) 
         {
+            Data = data;
         }
         public T Data { get; set; }
     }
